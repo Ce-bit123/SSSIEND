@@ -12,14 +12,14 @@ st.header("Risk prediction of early neurological deterioration within 72 hours  
 
 # Input bar 1
 # Input bar 2
-NIHSS score = st.number_input("Enter NIHSS score on admission")
+NIHSS = st.number_input("Enter NIHSS score on admission")
 #NIHSS_score_after_thrombolysis1 = st.number_input("Enter NIHSS score after thrombolysis")
 hemoglobin = st.number_input("Enter Hemoglobin(g/L)")
 age = st.number_input("Enter Age(years)")
 #fasting_blood_glucose= st.number_input("Enter Fasting blood glucose")
 # Dropdown input
-posterior type = st.selectbox("Whether it conforms to the posterior type", ("Yes", "No"))
-onset to admission = st.number_input("Enter Time from onset to admission(hours)")
+posterior = st.selectbox("Whether it conforms to the posterior type", ("Yes", "No"))
+OTA = st.number_input("Enter Time from onset to admission(hours)")
 
 # If button is pressed
 if st.button("Submit"):
@@ -27,7 +27,7 @@ if st.button("Submit"):
     clf = joblib.load("clfSSSI.pkl")
 
     # Store inputs into dataframe
-    X = pd.DataFrame([[onset to admission, NIHSS score, hemoglobin,age,posterior type]],
+    X = pd.DataFrame([[OTA, NIHSS, hemoglobin,age,posterior]],
                      columns=["onset to admission", "NIHSS score", "hemoglobin","age",
                        "posterior type"])
     X = X.replace(["Yes", "No"], [1, 0])
