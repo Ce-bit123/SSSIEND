@@ -11,8 +11,6 @@ import matplotlib.image as mpimg
 st.header("Risk prediction of early neurological deterioration within 72 hours  in single small subcortical infarct")
 
 # Input bar 1
-onset to admission = st.number_input("Enter Time from onset to admission(hours)")
-
 # Input bar 2
 NIHSS score = st.number_input("Enter NIHSS score on admission")
 #NIHSS_score_after_thrombolysis1 = st.number_input("Enter NIHSS score after thrombolysis")
@@ -21,6 +19,7 @@ age = st.number_input("Enter Age(years)")
 #fasting_blood_glucose= st.number_input("Enter Fasting blood glucose")
 # Dropdown input
 posterior type = st.selectbox("Whether it conforms to the posterior type", ("Yes", "No"))
+onset to admission = st.number_input("Enter Time from onset to admission(hours)")
 
 # If button is pressed
 if st.button("Submit"):
