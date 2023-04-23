@@ -28,8 +28,7 @@ if st.button("Submit"):
     clf = joblib.load("clfSSSI.pkl")
 
     # Store inputs into dataframe
-    X = pd.DataFrame([[onset to admission, NIHSS score, hemoglobin,age,
-                      posterior type]],
+    X = pd.DataFrame([[onset to admission, NIHSS score, hemoglobin,age,posterior type]],
                      columns=["onset to admission", "NIHSS score", "hemoglobin","age",
                        "posterior type"])
     X = X.replace(["Yes", "No"], [1, 0])
