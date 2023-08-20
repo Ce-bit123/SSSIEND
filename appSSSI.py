@@ -24,8 +24,6 @@ antiplatelet = st.selectbox("Whether dual antiplatelet therapy was administered 
 PAD = st.selectbox("Whether it manifests as parent artery disease",("Yes","No"))
 # If button is pressed
 @njit
-def foo(x):
-    x.append(10)
 if st.button("Submit"):
     # Unpickle classifier
     clf = joblib.load("clfSSSIENDxgboost.pkl")
@@ -37,14 +35,12 @@ if st.button("Submit"):
                      columns=["antiplatelet", "hemoglobin","NIHSS score",
                        "posterior type","PAD"])
     X = X.replace(["Yes", "No"], [1, 0])
-    typed_X = List()
-    [typed_X.append(x) for x in X]
-    foo(typed_X)
+    
     # Get prediction
-    prediction = clf.predict(typed_X)[0]
+    prediction = clf.predict(X)[0]
 
     explainer = shap.TreeExplainer(clf)
-    shap_values = explainer.shap_values(typed_X)
+    shap_values = explainer.shap_values(X)
     # f = plt.figure()
     # shap.force_plot(explainer.expected_value, shap_values[0,:], X.iloc[0,:])
     # f.savefig("shap_force_plot.png", bbox_inches='tight', dpi=600)
@@ -53,7 +49,7 @@ if st.button("Submit"):
     # st.image(P, caption="shap_force_plot", channels="RGB")
     # st_shap(shap.plots.waterfall(shap_values[0]), height=300)
     # st_shap(shap.plots.beeswarm(shap_values), height=300)
-    st_shap(shap.force_plot(explainer.expected_value, shap_values[0, :], typed_X.iloc[0, :]), height=200, width=700)
+    st_shap(shap.force_plot(explainer.expected_value, shap_values[0, :],X.iloc[0, :]), height=200, width=700)
     if prediction == 0:
         st.text(f"This patient has a higher probability of Non-END within 72 hours")
     else:
