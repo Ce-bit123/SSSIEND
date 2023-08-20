@@ -8,7 +8,11 @@ import matplotlib.image as mpimg
 from numba import jit
 from numba.typed import List
 
+from numba.core.errors import NumbaDeprecationWarning, NumbaPendingDeprecationWarning
+import warnings
 
+warnings.simplefilter('ignore', category=NumbaDeprecationWarning)
+warnings.simplefilter('ignore', category=NumbaPendingDeprecationWarning)
 # Title
 st.header("Risk prediction of early neurological deterioration within 72 hours in single small subcortical infarct")
 
@@ -24,7 +28,7 @@ posterior = st.selectbox("Whether it conforms to the posterior type", ("Yes", "N
 antiplatelet = st.selectbox("Whether dual antiplatelet therapy was administered after admission",("Yes","No"))
 PAD = st.selectbox("Whether it manifests as parent artery disease",("Yes","No"))
 # If button is pressed
-@jit(nopython=True) 
+ 
 if st.button("Submit"):
     # Unpickle classifier
     clf = joblib.load("clfSSSIENDxgboost.pkl")
