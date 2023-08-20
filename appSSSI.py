@@ -6,13 +6,8 @@ import joblib
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from numba import jit
-from numba.typed import List
+from numba.typed import list
 
-from numba.core.errors import NumbaDeprecationWarning, NumbaPendingDeprecationWarning
-import warnings
-
-warnings.simplefilter('ignore', category=NumbaDeprecationWarning)
-warnings.simplefilter('ignore', category=NumbaPendingDeprecationWarning)
 # Title
 st.header("Risk prediction of early neurological deterioration within 72 hours in single small subcortical infarct")
 
@@ -32,18 +27,25 @@ PAD = st.selectbox("Whether it manifests as parent artery disease",("Yes","No"))
 if st.button("Submit"):
     # Unpickle classifier
     clf = joblib.load("clfSSSIENDxgboost.pkl")
+    @njit
+    def foo(x):
+    x.append(10)
 
+    
+    
     # Store inputs into dataframe
     X = pd.DataFrame([[antiplatelet,hemoglobin,NIHSS,posterior,PAD]],
                      columns=["antiplatelet", "hemoglobin","NIHSS score",
                        "posterior type","PAD"])
     X = X.replace(["Yes", "No"], [1, 0])
-
+    typed_X = List()
+    [typed_X.append(x) for x in X]
+    foo(typed_X)
     # Get prediction
-    prediction = clf.predict(X)[0]
+    prediction = clf.predict(typed_X)[0]
 
     explainer = shap.TreeExplainer(clf)
-    shap_values = explainer.shap_values(X)
+    shap_values = explainer.shap_values(typed_X)
     # f = plt.figure()
     # shap.force_plot(explainer.expected_value, shap_values[0,:], X.iloc[0,:])
     # f.savefig("shap_force_plot.png", bbox_inches='tight', dpi=600)
@@ -52,7 +54,7 @@ if st.button("Submit"):
     # st.image(P, caption="shap_force_plot", channels="RGB")
     # st_shap(shap.plots.waterfall(shap_values[0]), height=300)
     # st_shap(shap.plots.beeswarm(shap_values), height=300)
-    st_shap(shap.force_plot(explainer.expected_value, shap_values[0, :], X.iloc[0, :]), height=200, width=700)
+    st_shap(shap.force_plot(explainer.expected_value, shap_values[0, :], typed_X.iloc[0, :]), height=200, width=700)
     if prediction == 0:
         st.text(f"This patient has a higher probability of Non-END within 72 hours")
     else:
