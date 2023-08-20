@@ -6,7 +6,7 @@ import joblib
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from numba import njit,jit
-@jit((nopython=False))
+
 # Title
 st.header("Risk prediction of early neurological deterioration within 72 hours in single small subcortical infarct")
 
@@ -28,7 +28,7 @@ if st.button("Submit"):
     clf = joblib.load("clfSSSIENDxgboost.pkl")
 
     
-    
+    @jit((nopython=False))
     # Store inputs into dataframe
     X = pd.DataFrame([[antiplatelet,hemoglobin,NIHSS,posterior,PAD]],
                      columns=["antiplatelet", "hemoglobin","NIHSS score",
