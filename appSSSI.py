@@ -5,6 +5,7 @@ import pandas as pd
 import joblib
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+import numba
 from numba import njit,jit
 
 # Title
