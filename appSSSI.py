@@ -24,6 +24,7 @@ antiplatelet = st.selectbox("Whether dual antiplatelet therapy was administered 
 PAD = st.selectbox("Whether it manifests as parent artery disease",("Yes","No"))
 # If button is pressed
 @njit
+
 if st.button("Submit"):
     # Unpickle classifier
     clf = joblib.load("clfSSSIENDxgboost.pkl")
