@@ -25,6 +25,7 @@ PAD = st.selectbox("Whether it manifests as parent artery disease",("Yes","No"))
 
 if st.button("Submit"):
     # Unpickle classifier
+    @numba.jit(nopython=True)
     clf = joblib.load("clfSSSIENDxgboost.pkl")
 
     
