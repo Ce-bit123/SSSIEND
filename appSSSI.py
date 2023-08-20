@@ -23,7 +23,7 @@ posterior = st.selectbox("Whether it conforms to the posterior type", ("Yes", "N
 antiplatelet = st.selectbox("Whether dual antiplatelet therapy was administered after admission",("Yes","No"))
 PAD = st.selectbox("Whether it manifests as parent artery disease",("Yes","No"))
 # If button is pressed
-assert not nopython_signatures 
+
 if st.button("Submit"):
     # Unpickle classifier
     
