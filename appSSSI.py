@@ -1,12 +1,13 @@
 import streamlit as st
-
 import shap
 from streamlit_shap import st_shap
 import pandas as pd
 import joblib
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+
 from numba import jit
+@numba.jit(nopython=True)
 
 # Title
 st.header("Risk prediction of early neurological deterioration within 72 hours in single small subcortical infarct")
@@ -26,11 +27,7 @@ PAD = st.selectbox("Whether it manifests as parent artery disease",("Yes","No"))
 
 if st.button("Submit"):
     # Unpickle classifier
-    
     clf = joblib.load("clfSSSIENDxgboost.pkl")
-    
-    
-    
     # Store inputs into dataframe
     X = pd.DataFrame([[antiplatelet,hemoglobin,NIHSS,posterior,PAD]],
                      columns=["antiplatelet", "hemoglobin","NIHSS score",
