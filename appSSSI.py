@@ -5,9 +5,10 @@ import pandas as pd
 import joblib
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-from numba import njit
+from numba import jit
 from numba.typed import List
 
+@jit(nopython=True) 
 # Title
 st.header("Risk prediction of early neurological deterioration within 72 hours in single small subcortical infarct")
 
