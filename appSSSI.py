@@ -1,6 +1,5 @@
 import streamlit as st
-import warnings
-warnings.filterwarnings("ignore", message=".*The 'nopython' keyword.*")
+
 import shap
 from streamlit_shap import st_shap
 import pandas as pd
