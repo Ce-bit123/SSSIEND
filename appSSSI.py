@@ -29,7 +29,7 @@ if st.button("Submit"):
     clf = joblib.load("clfSSSIENDxgboost.pkl")
 
     
-    @jit((nopython=False))
+    @njit((nopython=False))
     # Store inputs into dataframe
     X = pd.DataFrame([[antiplatelet,hemoglobin,NIHSS,posterior,PAD]],
                      columns=["antiplatelet", "hemoglobin","NIHSS score",
