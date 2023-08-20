@@ -14,8 +14,8 @@ hemoglobin = st.number_input("Enter Hemoglobin(g/L)")
 #fasting_blood_glucose= st.number_input("Enter Fasting blood glucose")
 # Dropdown input
 posterior = st.selectbox("Whether it conforms to the posterior type", ("Yes", "No"))
-antiplatelet = st.selectbox("Whether dual antiplatelet therapy was administered after admission", ("Yes", "No"))
-PAD = st.selectbox("Whether it manifests as parent artery disease", ("Yes", "No"))
+antiplatelet = st.selectbox("Whether dual antiplatelet therapy was administered after admission",("Yes","No"))
+PAD = st.selectbox("Whether it manifests as parent artery disease",("Yes","No"))
 # If button is pressed
 if st.button("Submit"):
     # Unpickle classifier
