@@ -6,7 +6,7 @@ import pandas as pd
 import joblib
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-
+from numba import jit
 
 # Title
 st.header("Risk prediction of early neurological deterioration within 72 hours in single small subcortical infarct")
@@ -23,7 +23,7 @@ posterior = st.selectbox("Whether it conforms to the posterior type", ("Yes", "N
 antiplatelet = st.selectbox("Whether dual antiplatelet therapy was administered after admission",("Yes","No"))
 PAD = st.selectbox("Whether it manifests as parent artery disease",("Yes","No"))
 # If button is pressed
-
+assert not clf.nopython_signatures 
 if st.button("Submit"):
     # Unpickle classifier
     
