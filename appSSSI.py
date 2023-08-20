@@ -1,4 +1,6 @@
 import streamlit as st
+import warnings
+warnings.filterwarnings("ignore", message=".*The 'nopython' keyword.*")
 import shap
 from streamlit_shap import st_shap
 import pandas as pd
@@ -25,7 +27,7 @@ PAD = st.selectbox("Whether it manifests as parent artery disease",("Yes","No"))
 
 if st.button("Submit"):
     # Unpickle classifier
-    @numba.jit(nopython=True)
+    
     clf = joblib.load("clfSSSIENDxgboost.pkl")
 
     
