@@ -1,5 +1,10 @@
-disease", ("Yes","No"))import pandas as pd
-admission", ("Yes","No")), ()import matplotlib.image as mpimg
+import streamlit as st
+import shap
+from streamlit_shap import st_shap
+import pandas as pd
+import joblib
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 
 # Title
