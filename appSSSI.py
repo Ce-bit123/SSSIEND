@@ -6,7 +6,6 @@ import joblib
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-from numba import njit, jit
 
 # Title
 st.header("Risk prediction of early neurological deterioration within 72 hours in single small subcortical infarct")
