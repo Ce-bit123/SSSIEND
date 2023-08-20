@@ -1,35 +1,30 @@
-import streamlit as st
-import shap
-from streamlit_shap import st_shap
-import pandas as pd
-import joblib
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
+disease", ("Yes","No"))import pandas as pd
+admission", ("Yes","No")), ()import matplotlib.image as mpimg
 
 
 # Title
-st.header("Risk prediction of early neurological deterioration within 72 hours  in single small subcortical infarct")
+st.header("Risk prediction of early neurological deterioration within 72 hours in single small subcortical infarct")
 
 # Input bar 1
 # Input bar 2
 NIHSS = st.number_input("Enter NIHSS score on admission")
 #NIHSS_score_after_thrombolysis1 = st.number_input("Enter NIHSS score after thrombolysis")
 hemoglobin = st.number_input("Enter Hemoglobin(g/L)")
-age = st.number_input("Enter Age(years)")
+#age = st.number_input("Enter Age(years)")
 #fasting_blood_glucose= st.number_input("Enter Fasting blood glucose")
 # Dropdown input
 posterior = st.selectbox("Whether it conforms to the posterior type", ("Yes", "No"))
-OTA = st.number_input("Enter Time from onset to admission(hours)")
-
+antiplatelet = st.selectbox("Whether dual antiplatelet therapy was administered after admission", ("Yes", "No"))
+PAD = st.selectbox("Whether it manifests as parent artery disease", ("Yes", "No"))
 # If button is pressed
 if st.button("Submit"):
     # Unpickle classifier
-    clf = joblib.load("clfSSSI.pkl")
+    clf = joblib.load("clfSSSIENDxgboost.pkl")
 
     # Store inputs into dataframe
-    X = pd.DataFrame([[OTA, NIHSS, hemoglobin,age,posterior]],
-                     columns=["onset to admission", "NIHSS score", "hemoglobin","age",
-                       "posterior type"])
+    X = pd.DataFrame([[ antiplatelet, hemoglobin, NIHSS ,posterior,PAD]],
+                     columns=["antiplatelet", "hemoglobin","NIHSS score",
+                       "posterior type","PAD"])
     X = X.replace(["Yes", "No"], [1, 0])
 
     # Get prediction
