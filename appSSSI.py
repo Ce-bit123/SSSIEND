@@ -29,8 +29,8 @@ if st.button("Submit"):
     clf = joblib.load("clfSSSIENDxgboost.pkl")
     # Store inputs into dataframe
     X = pd.DataFrame([[antiplatelet,hemoglobin,NIHSS,posterior,PAD]],
-                     columns=["antiplatelet", "hemoglobin","NIHSS score",
-                       "posterior type","PAD"])
+                     columns=["antiplatelet", "hemoglobin","NIHSSscore",
+                       "posteriortype","PAD"])
     X = X.replace(["Yes", "No"], [1, 0])
     
     # Get prediction
