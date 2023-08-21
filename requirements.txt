@@ -7,5 +7,3 @@ shap==0.41.0
 matplotlib==3.2.2
 streamlit_shap==1.0.2
 xgboost==1.7.1
-
-numba ==0.59.0
