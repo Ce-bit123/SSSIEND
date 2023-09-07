@@ -9,7 +9,7 @@ import matplotlib.image as mpimg
 
 
 # Title
-st.header("Risk prediction of early neurological deterioration within 72 hours in single small subcortical infarct")
+st.header("Risk prediction of early neurological deterioration within 72 hours in recent small subcortical infarct")
 
 # Input bar 1
 # Input bar 2
